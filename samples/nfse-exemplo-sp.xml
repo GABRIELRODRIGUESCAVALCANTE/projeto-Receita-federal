@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NFSe versao="1.00">
+  <infNFSe Id="NFS35503081001" dhProc="2027-03-15T10:00:00-03:00">
+    <nNFSe>1001</nNFSe>
+    <ambGer>1</ambGer>
+    <cStat>100</cStat>
+    <DPS>
+      <infDPS>
+        <nDPS>1001</nDPS>
+        <serie>1</serie>
+        <dhEmi>2027-03-15T10:00:00-03:00</dhEmi>
+        <dCompet>2027-03-15</dCompet>
+        <tpEmit>1</tpEmit>
+        <tpAmb>1</tpAmb>
+        <prest>
+          <regTrib>
+            <opSimpNac>1</opSimpNac>
+          </regTrib>
+        </prest>
+        <serv>
+          <cServ>
+            <cTribNac>010101</cTribNac>
+            <cNBS>115021000</cNBS>
+            <xDescServ>Desenvolvimento e Arquitetura de Software - Exemplo RTC Studio</xDescServ>
+          </cServ>
+          <infoCompl>
+            <xInfComp>Nota de exemplo gerada para testes no RTC Studio (LC 214/2025)</xInfComp>
+          </infoCompl>
+        </serv>
+        <valores>
+          <vServPrest>
+            <vServ>15000.00</vServ>
+          </vServPrest>
+          <trib>
+            <tribMun>
+              <tribISSQN>1</tribISSQN>
+            </tribMun>
+            <gIBSCBS>
+              <CST>000</CST>
+              <cClassTrib>000001</cClassTrib>
+              <vCBS>1320.00</vCBS>
+              <vIBS>15.00</vIBS>
+            </gIBSCBS>
+          </trib>
+        </valores>
+      </infDPS>
+    </DPS>
+    <emit>
+      <CNPJ>12345678000195</CNPJ>
+      <xNome>RTC Studio Tecnologia LTDA</xNome>
+      <enderNac>
+        <cMun>3550308</cMun>
+        <CEP>01001000</CEP>
+      </enderNac>
+    </emit>
+    <valores>
+      <vLiq>15000.00</vLiq>
+    </valores>
+  </infNFSe>
+</NFSe>
+

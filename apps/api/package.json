@@ -1,0 +1,25 @@
+{
+  "name": "@rtc-studio/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "tsx --test src/**/*.test.ts"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.0.1",
+    "@rtc-studio/shared": "*",
+    "dotenv": "^16.4.7",
+    "fast-xml-parser": "^5.0.8",
+    "fastify": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "tsx": "^4.19.3"
+  }
+}
+

@@ -1,0 +1,83 @@
+services:
+  # 1. Init container: gera o banco SQLite oficial (calculadora-pro.db) via Flyway
+  #    usando as migrations do repositorio calculadora-rtc-regime-regular.
+  rtc-db-init:
+    build:
+      context: ./services/calculadora-rtc-regime-regular
+      dockerfile: ../../docker/Dockerfile.flyway-init
+    container_name: rtc-db-init
+    volumes:
+      - rtc_sqlite_db:/data
+    restart: "no"
+
+  # 2. Motor oficial: Regime Regular (CBS, IBS, IS, XML, Dados Abertos)
+  rtc-regime-regular:
+    build:
+      context: ./services/calculadora-rtc-regime-regular
+      dockerfile: ../../docker/Dockerfile.java-service
+      args:
+        JAR_NAME: api-regime-geral
+    container_name: rtc-regime-regular
+    depends_on:
+      rtc-db-init:
+        condition: service_completed_successfully
+    ports:
+      - "${RTC_REGIME_REGULAR_PORT:-8080}:8080"
+      - "${RTC_REGIME_REGULAR_MGMT_PORT:-9101}:9101"
+    volumes:
+      - rtc_sqlite_db:/app/calculadora/db:ro
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9101/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 25s
+    restart: unless-stopped
+
+  # 3. Motor oficial: Simples Nacional (CBS, IBS, Atividades, Observabilidade)
+  rtc-simples-nacional:
+    build:
+      context: ./services/calculadora-rtc-simples-nacional
+      dockerfile: ../../docker/Dockerfile.java-service
+      args:
+        JAR_NAME: api-simples-nacional
+    container_name: rtc-simples-nacional
+    depends_on:
+      rtc-db-init:
+        condition: service_completed_successfully
+    ports:
+      - "${RTC_SIMPLES_NACIONAL_PORT:-8082}:8082"
+      - "${RTC_SIMPLES_NACIONAL_MGMT_PORT:-9103}:9103"
+    volumes:
+      - rtc_sqlite_db:/app/calculadora/db:ro
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9103/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 25s
+    restart: unless-stopped
+
+  # 4. Motor oficial: Gerador DANFSe (XML de NFS-e -> PDF)
+  rtc-gerador-danfse:
+    build:
+      context: ./services/calculadora-rtc-gerador-danfse
+      dockerfile: Dockerfile
+    container_name: rtc-gerador-danfse
+    environment:
+      SERVER_PORT: "8083"
+      LOG_LEVEL: "${DANFSE_LOG_LEVEL:-info}"
+    ports:
+      - "${RTC_GERADOR_DANFSE_PORT:-8083}:8083"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8083/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  rtc_sqlite_db:
+    name: rtc_sqlite_db
+

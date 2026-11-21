@@ -1,0 +1,13 @@
+FROM maven:3.10-eclipse-temurin-25
+
+WORKDIR /workspace
+
+COPY pom.xml ./
+COPY flyway ./flyway
+
+# Gera o banco SQLite oficial no build da imagem (falha rapido se houver erro e evita re-execucao lenta no startup)
+RUN mkdir -p /workspace/calculadora/db && \
+    mvn flyway:migrate -Dflyway.configFiles=./flyway/flyway-pro.conf --batch-mode --errors && \
+    ls -lh /workspace/calculadora/db/calculadora-pro.db
+
+ENTRYPOINT ["/bin/bash", "-c", "mkdir -p /data && cp -f /workspace/calculadora/db/calculadora-pro.db /data/calculadora-pro.db && chmod 644 /data/calculadora-pro.db && ls -lh /data/calculadora-pro.db"]

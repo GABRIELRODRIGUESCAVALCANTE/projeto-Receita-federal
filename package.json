@@ -1,0 +1,24 @@
+{
+  "name": "rtc-studio",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Plataforma unificada da Reforma Tributaria (LC 214/2025) sobre os motores oficiais da Receita Federal",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"npm run dev -w @rtc-studio/api\" \"npm run dev -w @rtc-studio/web\"",
+    "build": "npm run build -w @rtc-studio/shared && npm run build -w @rtc-studio/api && npm run build -w @rtc-studio/web",
+    "test": "npm run test -w @rtc-studio/api",
+    "typecheck": "npm run typecheck -w @rtc-studio/shared && npm run typecheck -w @rtc-studio/api && npm run typecheck -w @rtc-studio/web",
+    "engines:up": "docker compose up -d --build",
+    "engines:down": "docker compose down",
+    "engines:smoke": "./scripts/smoke-test.sh"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.2"
+  }
+}
+

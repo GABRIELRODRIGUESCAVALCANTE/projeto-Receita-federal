@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.vite/
+
+# Local env & runtime data
+.env
+.env.local
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# Cloned upstream Receita Federal repositories (cloned via scripts/setup-services.sh)
+services/
+
+# Logs & OS
+*.log
+.DS_Store
+

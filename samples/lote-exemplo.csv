@@ -1,0 +1,6 @@
+arquivo,nota,uf,municipio,data,tipoItem,ncm,nbs,cst,cClassTrib,baseCalculo,cAtivSN,pCBSSN,pIBSSN,aliquotaCbs,aliquotaIbsUf,aliquotaIbsMun,erpCBS,erpIBS,erpIS
+nfse-001.xml,1001,SP,3550308,2027-03-15,servico,,115021000,000,000001,15000.00,01,2.38,0.03,8.8,0.05,0.05,1320.00,15.00,0
+nfse-002.xml,1002,RS,4314902,2027-03-15,servico,,122011200,200,200028,4200.00,01,2.50,0.05,8.8,0.05,0.05,210.00,1.68,0
+nfe-003.xml,2041,PR,4106902,2027-03-15,bem,22030000,,000,000001,8500.00,01,1.16,0.01,8.8,0.05,0.05,748.00,8.50,0
+nfe-004.xml,2042,MG,3106200,2027-03-15,bem,02013000,,200,200035,1800.00,01,1.16,0.01,8.8,0.05,0.05,,,
+

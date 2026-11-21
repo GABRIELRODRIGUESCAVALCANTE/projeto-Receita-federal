@@ -1,0 +1,24 @@
+FROM maven:3.10-eclipse-temurin-25 AS builder
+
+ARG JAR_NAME
+
+WORKDIR /build
+
+COPY pom.xml ./
+RUN mvn dependency:go-offline --batch-mode || true
+
+COPY . .
+RUN mvn package -DskipTests --batch-mode --errors && \
+    cp "target/${JAR_NAME}.jar" /build/app.jar
+
+FROM eclipse-temurin:25-jre
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+
+ENV TZ=America/Sao_Paulo
+
+WORKDIR /app
+
+COPY --from=builder /build/app.jar /app/app.jar
+
+ENTRYPOINT ["java", "-jar", "/app/app.jar", "--spring.profiles.active=offline"]
