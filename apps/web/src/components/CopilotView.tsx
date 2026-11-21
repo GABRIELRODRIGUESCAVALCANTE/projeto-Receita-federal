@@ -38,11 +38,10 @@ function FormattedMessage({ text, inverted = false }: { text: string; inverted?:
           return (
             <code
               key={idx}
-              className={`rounded px-1.5 py-0.5 font-mono text-[12px] ${
-                inverted
-                  ? 'bg-white/15 text-white'
-                  : 'border border-slate-200 bg-slate-50 text-slate-800 dark:border-[#2E3A49] dark:bg-[#0C1015] dark:text-slate-200'
-              }`}
+              className={`rounded px-1.5 py-0.5 font-mono text-[12px] ${inverted
+                ? 'bg-white/15 text-white'
+                : 'border border-slate-200 bg-slate-50 text-slate-800 dark:border-[#2E3A49] dark:bg-[#0C1015] dark:text-slate-200'
+                }`}
             >
               {part.slice(1, -1)}
             </code>
@@ -133,21 +132,19 @@ export function CopilotView({ onOpenInStudio, onOpenDanfse }: CopilotViewProps) 
           return (
             <div key={i} className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
               <div
-                className={`max-w-3xl space-y-3 rounded-lg px-4 py-3 ${
-                  isUser
-                    ? 'bg-[#0B4F6C] text-white dark:bg-[#147299]'
-                    : 'border border-slate-200 bg-white text-slate-800 shadow-2xs dark:border-[#232C38] dark:bg-[#131920] dark:text-slate-200 dark:shadow-none'
-                }`}
+                className={`max-w-3xl space-y-3 rounded-lg px-4 py-3 ${isUser
+                  ? 'bg-[#0B4F6C] text-white dark:bg-[#147299]'
+                  : 'border border-slate-200 bg-white text-slate-800 shadow-2xs dark:border-[#232C38] dark:bg-[#131920] dark:text-slate-200 dark:shadow-none'
+                  }`}
               >
                 <FormattedMessage text={m.content} inverted={isUser} />
 
                 {m.attachmentName && (
                   <div
-                    className={`inline-flex items-center gap-1.5 rounded px-2 py-1 font-mono text-[11px] ${
-                      isUser
-                        ? 'bg-white/15 text-white'
-                        : 'bg-slate-100 text-slate-700 dark:bg-[#1A222C] dark:text-slate-300'
-                    }`}
+                    className={`inline-flex items-center gap-1.5 rounded px-2 py-1 font-mono text-[11px] ${isUser
+                      ? 'bg-white/15 text-white'
+                      : 'bg-slate-100 text-slate-700 dark:bg-[#1A222C] dark:text-slate-300'
+                      }`}
                   >
                     <Paperclip className="h-3 w-3" aria-hidden="true" />
                     <span>{m.attachmentName}</span>
